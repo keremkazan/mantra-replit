@@ -8,7 +8,7 @@ export default class FilesTableRow extends Component {
     return (
       <tr>
         <td>
-          <a href={`files/${_id}`}>{name}</a>
+          <a href={`/file/${_id}`}>{name}</a>
         </td>
         <td>
           <a

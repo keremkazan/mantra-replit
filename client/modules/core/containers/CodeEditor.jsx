@@ -4,33 +4,25 @@ import FilesTableRow from './FilesTableRow';
 
 class FilesTable extends Component {
   render() {
-    const { files } = this.props;
+    const { file } = this.props;
+    const { name } = file;
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3 className="panel-title">Files</h3>
+          <h3 className="panel-title">{ name }</h3>
         </div>
         <div className="panel-body">
-          <table className="table table-striped">
-            <tbody>
-              {files.map((file) => (
-                <FilesTableRow
-                  key={file._id}
-                  file={file}
-                />
-              ))}
-            </tbody>
-          </table>
+          
         </div>
       </div>
     );
   }
 }
 
-export const composer = ({ files }, onData) => {
+export const composer = ({ files, id }, onData) => {
   if (Meteor.subscribe('files.public').ready()) {
     onData(null, {
-      files: files.find().fetch(),
+      file: files.findOne(id),
     });
   }
 };
