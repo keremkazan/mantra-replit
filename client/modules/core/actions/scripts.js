@@ -4,6 +4,7 @@ export default {
     console.log('running script!', id)
     setTimeout(() => {
       LocalState.set('isRunning', false);
+      LocalState.set('stdOut', 'keremkazan');
     }, 2000);
   },
 

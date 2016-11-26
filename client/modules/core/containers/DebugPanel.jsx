@@ -15,13 +15,13 @@ class DebugPanel extends Component {
           <RunButton
             fileId={file._id}
             onClick={runScript}
-            isActive={isRunning()}
+            isActive={isRunning}
             commonClassName='debug-btn'
           />
           <StepButton
             fileId={file._id}
             onClick={stepScript}
-            isActive={isStepping()}
+            isActive={isStepping}
             commonClassName='debug-btn'
           />
         </div>
@@ -30,10 +30,12 @@ class DebugPanel extends Component {
   }
 }
 
-export const composer = ({ files, id }, onData) => {
+export const composer = ({ files, id, isRunning, isStepping }, onData) => {
   if (Meteor.subscribe('files.public').ready()) {
     onData(null, {
       file: files.findOne(id),
+      isRunning: isRunning(),
+      isStepping: isStepping(),
     });
   }
 };

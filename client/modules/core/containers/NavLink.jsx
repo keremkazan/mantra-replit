@@ -22,7 +22,7 @@ export const composer = ({ name, routes, current }, onData) => {
 };
 
 export const depsMapper = (context, actions) => {
-  const { LocalState } = context;
+  const { FlowRouter } = context;
   return {
     routes: FlowRouter._routesMap,
     current: FlowRouter.getRouteName(),
