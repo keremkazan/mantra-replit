@@ -1,6 +1,5 @@
 import { useDeps, composeAll, composeWithTracker } from 'mantra-core';
 import React, { Component } from 'react';
-import FilesTableRow from './FilesTableRow';
 
 class FilesTable extends Component {
   render() {
@@ -12,7 +11,7 @@ class FilesTable extends Component {
           <h3 className="panel-title">{ name }</h3>
         </div>
         <div className="panel-body">
-          
+
         </div>
       </div>
     );

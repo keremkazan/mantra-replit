@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 
 export default class ReactiveButton extends Component {
-  renderActive() {
-    const { whenActive } = this.props;
-    return (
-      <div>active</div>
-    );
-  }
-
-  renderInActive() {
-    const { whenInactive } = this.props;
-    return (
-      <div>inactive</div>
-    );
-  }
-
   render() {
-    const { isActive } = this.props;
-    return isActive ?
-      this.renderActive() :
-      this.renderInActive();
+    const {
+      isActive,
+      whenActive,
+      whenInactive,
+      onClick,
+      commonClassName,
+    } = this.props;
+    const buttonParts = isActive ? whenActive : whenInactive;
+    const { className, content } = buttonParts;
+    return (
+      <a className={`${commonClassName} ${className}`} onClick={onClick}>
+        {content}
+      </a>
+    );
   }
 }

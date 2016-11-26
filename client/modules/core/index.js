@@ -6,5 +6,6 @@ export default {
   actions,
   load(context) {
     const { LocalState } = context;
+    LocalState.set('isRunning', false);
   }
 };
