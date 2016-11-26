@@ -5,7 +5,7 @@ export default class NewFileForm extends Component {
     event.preventDefault();
     const filenameInput = this.refs.filename;
     const { createFile } = this.props;
-    createFile();
+    createFile(filenameInput.value);
     filenameInput.value = '';
   }
 
