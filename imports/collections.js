@@ -3,9 +3,9 @@ import { Mongo } from 'meteor/mongo';
 export const Files = new Mongo.Collection('files');
 
 Meteor.methods({
-  'files.insert'(name) {
+  'files.insert'(filename) {
     return Files.insert({
-      name,
+      name: filename,
       code: '',
     });
   },
