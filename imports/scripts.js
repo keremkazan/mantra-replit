@@ -30,15 +30,18 @@ Meteor.methods({
   },
 
   'scripts.step': (id) => {
-    const fut = new Future();
-    exec(`python scripts/step.py`, function (err, stdout, stderr) {
-      new Fiber(function() {
-        fut.return({
-          stdout,
-          stderr,
-        });
-      }).run();
-    });
-    return fut.wait();
+    // const fut = new Future();
+    // exec(`python scripts/step.py`, function (err, stdout, stderr) {
+    //   new Fiber(function() {
+    //     fut.return({
+    //       stdout,
+    //       stderr,
+    //     });
+    //   }).run();
+    // });
+    // return fut.wait();
+    return {
+      stderr: 'Stepping is not implemented yet!',
+    };
   },
 });
