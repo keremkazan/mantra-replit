@@ -4,4 +4,4 @@ if you don't have pymongo, run: `pip install pymongo`
 
 finally, run: `meteor npm install && meteor`
 
-and point your browser to: http://localhost:3000
+and point your browser to: [http://localhost:3000][http://localhost:3000]
