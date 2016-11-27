@@ -8,7 +8,17 @@ import Future from 'fibers/future';
 Meteor.methods({
   'scripts.run': (id) => {
     const fut = new Future();
-    exec(`python scripts/run.py ${id}`, function (err, stdout, stderr) {
+    const scriptPath = path.join(
+      process.cwd(),
+      '../',
+      '../',
+      '../',
+      '../',
+      '../',
+      'scripts',
+      'run.py'
+    );
+    exec(`python ${scriptPath} ${id}`, function (err, stdout, stderr) {
       new Fiber(function() {
         fut.return({
           stdout,
