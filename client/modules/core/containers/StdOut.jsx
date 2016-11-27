@@ -19,9 +19,16 @@ const StdOut = ({ items, clear }) => {
       </div>
       <div className="panel-body">
         {items.map((item, index) => {
-          return (
-            <pre key={index}>{item}</pre>
-          );
+          const {stdout, stderr} = item;
+          if (stderr) {
+            return (
+              <pre className="debug-err" key={index}>{stderr}</pre>
+            );
+          } else {
+            return (
+              <pre className="debug-out" key={index}>{stdout}</pre>
+            );
+          }
         })}
       </div>
     </div>

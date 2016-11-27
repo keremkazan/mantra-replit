@@ -5,6 +5,7 @@ import 'codemirror/mode/python/python';
 import SaveButton from '../components/buttons/SaveButton';
 
 class CodeEditor extends Component {
+
   getSaveButtonStatus() {
     const { editor } = this.props;
     const { status } = editor;
@@ -15,10 +16,6 @@ class CodeEditor extends Component {
     } else {
       return 'inactive';
     }
-  }
-
-  componentDidUpdate() {
-    console.log('updated!');
   }
 
   render() {
@@ -42,7 +39,7 @@ class CodeEditor extends Component {
         </div>
 
         <div className="panel-body">
-          <div className="clearfix">
+          <div className="clearfix" ref="codemirror">
             <CodeMirror
               defaultValue={code}
               options={{

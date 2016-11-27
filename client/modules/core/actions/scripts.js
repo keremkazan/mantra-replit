@@ -3,7 +3,7 @@ import files from './files';
 function getStdOutWithText(cur, text) {
   return {
     ...cur,
-    items: [...cur.items, text],
+    items: [text, ...cur.items],
   };
 }
 
@@ -26,11 +26,13 @@ export default {
 
   step({ Meteor, LocalState }, id) {
     LocalState.set('isStepping', true);
-    setTimeout(() => {
+    Meteor.call('scripts.step', id, (err, result) => {
       LocalState.set('isStepping', false);
-      const cur = LocalState.get('editor');
-      LocalState.set('editor', getEditorWithNextLine(cur));
-    }, 100);
+      const curEditor = LocalState.get('editor');
+      LocalState.set('editor', getEditorWithNextLine(curEditor));
+      const curStdout = LocalState.get('stdOut');
+      LocalState.set('stdOut', getStdOutWithText(curStdout, result));
+    });
   },
 
   clearStdout({ LocalState }) {
