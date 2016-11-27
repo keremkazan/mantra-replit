@@ -7,4 +7,8 @@ export default {
   remove({ Meteor }, id) {
     return Meteor.call('files.remove', id);
   },
+  update({ Meteor }, id) {
+    console.log(update);
+    // return Meteor.call('files.remove', id);
+  },
 }

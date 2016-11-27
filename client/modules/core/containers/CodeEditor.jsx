@@ -1,5 +1,8 @@
 import { useDeps, composeAll, composeWithTracker } from 'mantra-core';
 import React, { Component } from 'react';
+import CodeMirror from 'react-codemirror';
+import 'codemirror/mode/python/python';
+import LineArrow from './LineArrow';
 
 class FilesTable extends Component {
   render() {
@@ -11,7 +14,15 @@ class FilesTable extends Component {
           <h3 className="panel-title">{ name }</h3>
         </div>
         <div className="panel-body">
-
+          <div className="clearfix">
+            {/* <LineArrow /> */}
+            <CodeMirror
+              options={{
+                mode: 'python',
+                lineNumbers: true,
+              }}
+            />
+          </div>
         </div>
       </div>
     );

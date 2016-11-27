@@ -1,18 +1,37 @@
+function getStdOutWithText(cur, text) {
+  return {
+    ...cur,
+    text: `${cur.text} ${text}\n\n*-------*\n\n`,
+  };
+}
+
+function getStdOutWithNextLine(cur) {
+  return {
+    ...cur,
+    lineNo: cur.lineNo + 1,
+  };
+}
+
 export default {
   run({ Meteor, LocalState }, id) {
     LocalState.set('isRunning', true);
-    console.log('running script!', id)
     setTimeout(() => {
       LocalState.set('isRunning', false);
-      LocalState.set('stdOut', 'keremkazan');
-    }, 2000);
+      const cur = LocalState.get('stdOut');
+      LocalState.set('stdOut', getStdOutWithText(cur, 'keremkazan'));
+    }, 100);
   },
 
   step({ Meteor, LocalState }, id) {
     LocalState.set('isStepping', true);
-    console.log('stepping script!', id)
     setTimeout(() => {
       LocalState.set('isStepping', false);
-    }, 2000);
+      const cur = LocalState.get('stdOut');
+      LocalState.set('stdOut', getStdOutWithNextLine(cur));
+    }, 100);
+  },
+
+  clearStdout({ LocalState }, id) {
+    LocalState.set('stdOut', '');
   },
 }

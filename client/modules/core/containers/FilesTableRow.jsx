@@ -15,7 +15,8 @@ class FilesTableRow extends Component {
             className="btn btn-danger"
             onClick={() => { removeFile(_id); }}
           >
-            Remove
+          <span className="glyphicon glyphicon-trash" aria-hidden="true">
+          </span> Remove
           </a>
         </td>
       </tr>
@@ -23,7 +24,7 @@ class FilesTableRow extends Component {
   }
 }
 
-
+<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 export const depsMapper = (context, actions) => {
   const { files } = actions;
   return {

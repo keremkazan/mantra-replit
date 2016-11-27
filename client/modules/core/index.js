@@ -7,5 +7,9 @@ export default {
   load(context) {
     const { LocalState } = context;
     LocalState.set('isRunning', false);
+    LocalState.set('stdOut', {
+      text: '',
+      lineNo: 1,
+    });
   }
 };
