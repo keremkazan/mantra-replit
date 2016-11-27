@@ -10,7 +10,7 @@ class DebugPanel extends Component {
     const { status } = editor;
     if (isRunning) {
       return 'active';
-    } else if (status === 'save') {
+    } else if (status === 'save' || status === 'saving') {
       return 'disabled';
     } else {
       return 'inactive';
@@ -22,7 +22,7 @@ class DebugPanel extends Component {
     const { status } = editor;
     if (isStepping) {
       return 'active';
-    } else if (status === 'save') {
+    } else if (status === 'save' || status === 'saving') {
       return 'disabled';
     } else {
       return 'inactive';

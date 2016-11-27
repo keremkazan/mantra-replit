@@ -15,7 +15,7 @@ export default class ReactiveButton extends Component {
       whenActive : isDisabled ?
       whenDisabled : whenInactive;
     const { className, content } = buttonParts;
-    const finalOnClick = isActive ? () => {} : onClick;
+    const finalOnClick = !(isActive || isDisabled) ? onClick : () => {};
     return (
       <button
         className={`${commonClassName} ${className}`}

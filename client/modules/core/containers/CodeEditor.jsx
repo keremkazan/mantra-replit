@@ -8,7 +8,6 @@ class CodeEditor extends Component {
   getSaveButtonStatus() {
     const { editor } = this.props;
     const { status } = editor;
-    console.log(editor);
     if (status === 'saving') {
       return 'active';
     } else if (status === 'saved') {
@@ -41,12 +40,15 @@ class CodeEditor extends Component {
         <div className="panel-body">
           <div className="clearfix">
             <CodeMirror
-              value={code}
+              defaultValue={code}
               options={{
                 mode: 'python',
                 lineNumbers: true,
               }}
-              onChange={onEditorUpdate}
+              onChange={(value) => {
+                onEditorUpdate();
+                updateFile(file._id, value);
+              }}
             />
           </div>
         </div>
