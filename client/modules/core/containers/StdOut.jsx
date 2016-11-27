@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDeps, composeAll, composeWithTracker } from 'mantra-core';
 
-const StdOut = ({ text, clear }) => {
+const StdOut = ({ items, clear }) => {
 
   return (
     <div className="panel panel-default">
@@ -18,19 +18,23 @@ const StdOut = ({ text, clear }) => {
         </div>
       </div>
       <div className="panel-body">
-        <pre>
-          {text}
-        </pre>
+        {items.map((item, index) => {
+          return (
+            <pre key={index}>{item}</pre>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-export const composer = ({ stdOut }, onData) => {
-  const { lineNo, text } = stdOut();
+export const composer = ({ stdOut, editor }, onData) => {
+  const { items } = stdOut();
+  const { lineNo } = editor();
+  console.log(lineNo);
   if (Meteor.subscribe('files.public').ready()) {
     onData(null, {
-      text,
+      items,
       lineNo,
     });
   }
@@ -42,6 +46,9 @@ export const depsMapper = (context, actions) => {
   return {
     stdOut: () => {
       return LocalState.get('stdOut');
+    },
+    editor: () => {
+      return LocalState.get('editor');
     },
     clear: clearStdout,
   };

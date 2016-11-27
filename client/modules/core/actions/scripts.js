@@ -1,11 +1,11 @@
 function getStdOutWithText(cur, text) {
   return {
     ...cur,
-    text: `${cur.text} ${text}\n\n*-------*\n\n`,
+    items: [...cur.items, text],
   };
 }
 
-function getStdOutWithNextLine(cur) {
+function getEditorWithNextLine(cur) {
   return {
     ...cur,
     lineNo: cur.lineNo + 1,
@@ -26,12 +26,14 @@ export default {
     LocalState.set('isStepping', true);
     setTimeout(() => {
       LocalState.set('isStepping', false);
-      const cur = LocalState.get('stdOut');
-      LocalState.set('stdOut', getStdOutWithNextLine(cur));
+      const cur = LocalState.get('editor');
+      LocalState.set('editor', getEditorWithNextLine(cur));
     }, 100);
   },
 
-  clearStdout({ LocalState }, id) {
-    LocalState.set('stdOut', '');
+  clearStdout({ LocalState }) {
+    LocalState.set('stdOut', {
+      items: [],
+    });
   },
 }

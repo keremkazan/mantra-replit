@@ -8,7 +8,9 @@ export default {
     const { LocalState } = context;
     LocalState.set('isRunning', false);
     LocalState.set('stdOut', {
-      text: '',
+      items: [],
+    });
+    LocalState.set('editor', {
       lineNo: 1,
     });
   }

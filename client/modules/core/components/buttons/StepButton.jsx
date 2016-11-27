@@ -14,7 +14,7 @@ export default ({ fileId, onClick, isActive, commonClassName }) => {
         className: 'btn btn-default',
         content: (
           <span>
-            <span className="glyphicon glyphicon-play" aria-hidden="true">
+            <span className="glyphicon glyphicon-chevron-right" aria-hidden="true">
             </span> Step
           </span>
         ),

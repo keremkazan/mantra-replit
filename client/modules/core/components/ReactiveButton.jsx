@@ -12,9 +12,9 @@ export default class ReactiveButton extends Component {
     const buttonParts = isActive ? whenActive : whenInactive;
     const { className, content } = buttonParts;
     return (
-      <a className={`${commonClassName} ${className}`} onClick={onClick}>
+      <button className={`${commonClassName} ${className}`} onClick={onClick}>
         {content}
-      </a>
+      </button>
     );
   }
 }
