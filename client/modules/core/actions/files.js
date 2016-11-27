@@ -17,7 +17,6 @@ export default {
     }
 
     Libs.delayWithReset('files.update', 1000, () => {
-      console.log('delayed and finished');
       Meteor.call('files.update', id, code);
       LocalState.set('editor', {
         ...prevEditor,

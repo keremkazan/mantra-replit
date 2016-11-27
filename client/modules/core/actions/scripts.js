@@ -17,11 +17,11 @@ function getEditorWithNextLine(cur) {
 export default {
   run({ Meteor, LocalState }, id) {
     LocalState.set('isRunning', true);
-    setTimeout(() => {
+    Meteor.call('scripts.run', id, (err, result) => {
       LocalState.set('isRunning', false);
       const cur = LocalState.get('stdOut');
-      LocalState.set('stdOut', getStdOutWithText(cur, 'keremkazan'));
-    }, 100);
+      LocalState.set('stdOut', getStdOutWithText(cur, result));
+    });
   },
 
   step({ Meteor, LocalState }, id) {

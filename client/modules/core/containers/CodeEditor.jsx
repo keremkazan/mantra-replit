@@ -17,6 +17,10 @@ class CodeEditor extends Component {
     }
   }
 
+  componentDidUpdate() {
+    console.log('updated!');
+  }
+
   render() {
     const { file, updateFile, onEditorUpdate } = this.props;
     const { _id, name, code } = file;

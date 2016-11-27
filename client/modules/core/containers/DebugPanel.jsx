@@ -6,11 +6,11 @@ import StepButton from '../components/buttons/StepButton';
 class DebugPanel extends Component {
 
   getRunButtonStatus() {
-    const { editor, isRunning } = this.props;
+    const { editor, isRunning, isStepping } = this.props;
     const { status } = editor;
     if (isRunning) {
       return 'active';
-    } else if (status === 'save' || status === 'saving') {
+    } else if (status === 'save' || status === 'saving' || isStepping) {
       return 'disabled';
     } else {
       return 'inactive';
@@ -18,11 +18,11 @@ class DebugPanel extends Component {
   }
 
   getStepButtonStatus() {
-    const { editor, isStepping } = this.props;
+    const { editor, isStepping, isRunning } = this.props;
     const { status } = editor;
     if (isStepping) {
       return 'active';
-    } else if (status === 'save' || status === 'saving') {
+    } else if (status === 'save' || status === 'saving' || isRunning) {
       return 'disabled';
     } else {
       return 'inactive';
