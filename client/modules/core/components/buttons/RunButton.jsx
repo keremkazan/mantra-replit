@@ -2,13 +2,23 @@ import React from 'react';
 import ReactiveButton from '../ReactiveButton';
 import Cog from '../Cog';
 
-export default ({ fileId, onClick, isActive, commonClassName }) => {
+export default ({ onClick, status, commonClassName }) => {
   return (
     <ReactiveButton
-      isActive={isActive}
+      isActive={status === 'active'}
+      isDisabled={status === 'disabled'}
       whenActive={{
         className: 'btn btn-success disabled',
         content: <span><Cog /> Running </span>
+      }}
+      whenDisabled={{
+        className: 'btn btn-success disabled',
+        content: (
+          <span>
+            <span className="glyphicon glyphicon-play" aria-hidden="true">
+            </span> Run
+          </span>
+        ),
       }}
       whenInactive={{
         className: 'btn btn-success',
@@ -19,9 +29,7 @@ export default ({ fileId, onClick, isActive, commonClassName }) => {
           </span>
         ),
       }}
-      onClick={() => {
-        onClick(fileId);
-      }}
+      onClick={onClick}
       commonClassName={commonClassName}
     />
   );

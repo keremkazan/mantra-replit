@@ -5,7 +5,7 @@ import MainLayout from './components/MainLayout';
 import AllFilesPage from './components/AllFilesPage';
 import SingleFilePage from './components/SingleFilePage';
 
-export default function (injectDeps, { FlowRouter }) {
+export default function (injectDeps, { FlowRouter, LocalState }) {
   const MainLayoutCtx = injectDeps(MainLayout);
 
   FlowRouter.route('/', {

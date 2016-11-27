@@ -2,25 +2,51 @@ import { useDeps, composeAll, composeWithTracker } from 'mantra-core';
 import React, { Component } from 'react';
 import CodeMirror from 'react-codemirror';
 import 'codemirror/mode/python/python';
-import LineArrow from './LineArrow';
+import SaveButton from '../components/buttons/SaveButton';
 
-class FilesTable extends Component {
+class CodeEditor extends Component {
+  getSaveButtonStatus() {
+    const { editor } = this.props;
+    const { status } = editor;
+    console.log(editor);
+    if (status === 'saving') {
+      return 'active';
+    } else if (status === 'saved') {
+      return 'disabled';
+    } else {
+      return 'inactive';
+    }
+  }
+
   render() {
-    const { file } = this.props;
-    const { name } = file;
+    const { file, updateFile, onEditorUpdate } = this.props;
+    const { _id, name, code } = file;
     return (
       <div className="panel panel-default">
         <div className="panel-heading">
-          <h3 className="panel-title">{ name }</h3>
+          <div className="clearfix">
+            <h3 className="panel-title pull-left">{ name }</h3>
+            <span className="pull-right">
+              <SaveButton
+                onClick={() => {
+                  updateFile(file._id, 'keremkazan');
+                }}
+                status={this.getSaveButtonStatus()}
+                commonClassName='debug-btn'
+              />
+            </span>
+          </div>
         </div>
+
         <div className="panel-body">
           <div className="clearfix">
-            {/* <LineArrow /> */}
             <CodeMirror
+              value={code}
               options={{
                 mode: 'python',
                 lineNumbers: true,
               }}
+              onChange={onEditorUpdate}
             />
           </div>
         </div>
@@ -29,22 +55,28 @@ class FilesTable extends Component {
   }
 }
 
-export const composer = ({ files, id }, onData) => {
+export const composer = ({ files, editor, id }, onData) => {
   if (Meteor.subscribe('files.public').ready()) {
     onData(null, {
       file: files.findOne(id),
+      editor: editor(),
     });
   }
 };
 
 export const depsMapper = (context, actions) => {
-  const { Collections, Meteor } = context;
+  const { Collections, LocalState } = context;
   return {
     files: Collections.Files,
+    updateFile: actions.files.updateFile,
+    onEditorUpdate: actions.files.onEditorUpdate,
+    editor: () => {
+      return LocalState.get('editor');
+    },
   };
 };
 
 export default composeAll(
   composeWithTracker(composer),
   useDeps(depsMapper)
-)(FilesTable);
+)(CodeEditor);

@@ -1,3 +1,5 @@
+import files from './files';
+
 function getStdOutWithText(cur, text) {
   return {
     ...cur,

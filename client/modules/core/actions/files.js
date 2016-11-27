@@ -7,8 +7,29 @@ export default {
   remove({ Meteor }, id) {
     return Meteor.call('files.remove', id);
   },
-  update({ Meteor }, id) {
-    console.log(update);
+  updateFile({ Meteor, LocalState, Libs }, id, code) {
+    const prevEditor = LocalState.get('editor');
+    if (!prevEditor['isSaving']) {
+      LocalState.set('editor', {
+        ...prevEditor,
+        status: 'saving',
+      });
+    }
+
+    Libs.delayWithReset('files.update', 1000, () => {
+      console.log('delayed and finished');
+      Meteor.call('files.update', id, code);
+      LocalState.set('editor', {
+        ...prevEditor,
+        status: 'saved',
+      });
+    });
     // return Meteor.call('files.remove', id);
+  },
+  onEditorUpdate({ LocalState }) {
+    LocalState.set('editor', {
+      ...LocalState.get('editor'),
+      status: 'save',
+    });
   },
 }

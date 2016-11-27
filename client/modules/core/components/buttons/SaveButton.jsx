@@ -8,24 +8,24 @@ export default ({ onClick, status, commonClassName }) => {
       isActive={status === 'active'}
       isDisabled={status === 'disabled'}
       whenActive={{
-        className: 'btn btn-default disabled',
-        content: <span><Cog /> Stepping </span>
+        className: 'btn btn-success disabled',
+        content: <span><Cog /> Saving </span>
       }}
       whenDisabled={{
         className: 'btn btn-default disabled',
         content: (
           <span>
-            <span className="glyphicon glyphicon-chevron-right" aria-hidden="true">
-            </span> Step
+            <span className="glyphicon glyphicon-ok" aria-hidden="true">
+            </span> Saved
           </span>
         ),
       }}
       whenInactive={{
-        className: 'btn btn-default',
+        className: 'btn btn-success',
         content: (
           <span>
-            <span className="glyphicon glyphicon-chevron-right" aria-hidden="true">
-            </span> Step
+            <span className="glyphicon glyphicon-floppy-disk" aria-hidden="true">
+            </span> Save
           </span>
         ),
       }}

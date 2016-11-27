@@ -31,7 +31,6 @@ const StdOut = ({ items, clear }) => {
 export const composer = ({ stdOut, editor }, onData) => {
   const { items } = stdOut();
   const { lineNo } = editor();
-  console.log(lineNo);
   if (Meteor.subscribe('files.public').ready()) {
     onData(null, {
       items,

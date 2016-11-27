@@ -12,6 +12,8 @@ export default {
     });
     LocalState.set('editor', {
       lineNo: 1,
+      status: 'saved',
     });
+    LocalState.set('delayedActions', {});
   }
 };
